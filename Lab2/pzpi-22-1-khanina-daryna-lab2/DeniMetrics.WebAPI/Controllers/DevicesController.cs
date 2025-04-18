@@ -1,5 +1,6 @@
 ﻿using DeniMetrics.WebAPI.Attributes;
 using DineMetrics.Core.Dto;
+using DineMetrics.Core.Enums;
 using DineMetrics.Core.Models;
 using DineMetrics.DAL.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -19,6 +20,7 @@ public class DevicesController : BaseController
     
     [HttpGet]
     [Authorize]
+    [PermissionAuthorize(ManagementName.DevicesManagement, PermissionAccess.Read)]
     public async Task<ActionResult<List<DeviceDto>>> GetAll()
     {
         var devices = await _deviceRepository.GetAllAsync();
@@ -35,6 +37,7 @@ public class DevicesController : BaseController
     
     [HttpGet("{id}")]
     [Authorize]
+    [PermissionAuthorize(ManagementName.DevicesManagement, PermissionAccess.Read)]
     public async Task<ActionResult<DeviceDto>> GetById(int id)
     {
         var result = await _deviceRepository.GetByIdAsync(id);
@@ -52,6 +55,7 @@ public class DevicesController : BaseController
     
     [HttpPost]
     [Authorize]
+    [PermissionAuthorize(ManagementName.DevicesManagement, PermissionAccess.Full)]
     public async Task<ActionResult> Create([FromBody] DeviceDto dto)
     {
         var eatery = await _eateryRepository.GetByIdAsync(dto.EateryId);
@@ -73,6 +77,7 @@ public class DevicesController : BaseController
     
     [HttpPut("{id}")]
     [Authorize]
+    [PermissionAuthorize(ManagementName.DevicesManagement, PermissionAccess.Full)]
     public async Task<ActionResult> Update(int id, [FromBody] DeviceDto dto)
     {
         var existingDevice = await _deviceRepository.GetByIdAsync(id);
@@ -95,6 +100,7 @@ public class DevicesController : BaseController
     
     [HttpPut("{id:int}/{delay:int}")]
     [Authorize]
+    [PermissionAuthorize(ManagementName.DevicesManagement, PermissionAccess.Full)]
     public async Task<ActionResult> Update(int id, int delay)
     {
         if (delay <= 0)
@@ -125,6 +131,7 @@ public class DevicesController : BaseController
 
     [HttpDelete("{id}")]
     [Authorize]
+    [PermissionAuthorize(ManagementName.DevicesManagement, PermissionAccess.Full)]
     public async Task<ActionResult> Delete(int id)
     {
         await _deviceRepository.RemoveByIdAsync(id);

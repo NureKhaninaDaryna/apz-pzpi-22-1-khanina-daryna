@@ -1,6 +1,7 @@
 ﻿using DeniMetrics.WebAPI.Attributes;
 using DineMetrics.BLL.Services.Interfaces;
 using DineMetrics.Core.Dto;
+using DineMetrics.Core.Enums;
 using DineMetrics.Core.Models;
 using DineMetrics.DAL.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +26,7 @@ public class TemperatureMetricsController : BaseController
 
     [HttpGet]
     [Authorize]
+    [PermissionAuthorize(ManagementName.MetricsManagement, PermissionAccess.Read)]
     public async Task<ActionResult<List<TemperatureMetricDto>>> GetAll()
     {
         var temperatureMetrics = await _temperatureMetricRepository.GetAllAsync();
@@ -41,6 +43,7 @@ public class TemperatureMetricsController : BaseController
 
     [HttpGet("{id}")]
     [Authorize]
+    [PermissionAuthorize(ManagementName.MetricsManagement, PermissionAccess.Read)]
     public async Task<ActionResult<TemperatureMetricDto>> GetById(int id)
     {
         var result = await _temperatureMetricRepository.GetByIdAsync(id);
@@ -82,6 +85,7 @@ public class TemperatureMetricsController : BaseController
 
     [HttpDelete("{id}")]
     [Authorize]
+    [PermissionAuthorize(ManagementName.MetricsManagement, PermissionAccess.Full)]
     public async Task<ActionResult> Delete(int id)
     {
         await _temperatureMetricRepository.RemoveByIdAsync(id);

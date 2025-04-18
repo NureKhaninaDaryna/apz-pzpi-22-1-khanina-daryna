@@ -1,6 +1,7 @@
 ﻿using DeniMetrics.WebAPI.Attributes;
 using DineMetrics.BLL.Helpers;
 using DineMetrics.BLL.Services.Interfaces;
+using DineMetrics.Core.Enums;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DeniMetrics.WebAPI.Controllers;

@@ -1,5 +1,6 @@
 ﻿using DeniMetrics.WebAPI.Attributes;
 using DineMetrics.Core.Dto;
+using DineMetrics.Core.Enums;
 using DineMetrics.Core.Models;
 using DineMetrics.DAL.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -19,6 +20,7 @@ public class EmployeesController : BaseController
     }
 
     [HttpGet]
+    [PermissionAuthorize(ManagementName.EmployeesManagement, PermissionAccess.Read)]
     public async Task<ActionResult<List<EmployeeDto>>> GetAll()
     {
         var employees = await _employeeRepository.GetAllAsync();
@@ -37,6 +39,7 @@ public class EmployeesController : BaseController
     }
 
     [HttpGet("{id}")]
+    [PermissionAuthorize(ManagementName.EmployeesManagement, PermissionAccess.Read)]
     public async Task<ActionResult<EmployeeDto>> GetById(int id)
     {
         var result = await _employeeRepository.GetByIdAsync(id);
@@ -56,6 +59,7 @@ public class EmployeesController : BaseController
     }
 
     [HttpPost]
+    [PermissionAuthorize(ManagementName.EmployeesManagement, PermissionAccess.Full)]
     public async Task<ActionResult> Create([FromBody] EmployeeDto dto)
     {
         var manager = await _userRepository.GetByIdAsync(dto.ManagerId);
@@ -79,6 +83,7 @@ public class EmployeesController : BaseController
     }
 
     [HttpPut("{id}")]
+    [PermissionAuthorize(ManagementName.EmployeesManagement, PermissionAccess.Full)]
     public async Task<ActionResult> Update(int id, [FromBody] EmployeeDto dto)
     {
         var existingEmployee = await _employeeRepository.GetByIdAsync(id);
@@ -102,6 +107,7 @@ public class EmployeesController : BaseController
     }
 
     [HttpDelete("{id}")]
+    [PermissionAuthorize(ManagementName.EmployeesManagement, PermissionAccess.Full)]
     public async Task<ActionResult> Delete(int id)
     {
         await _employeeRepository.RemoveByIdAsync(id);

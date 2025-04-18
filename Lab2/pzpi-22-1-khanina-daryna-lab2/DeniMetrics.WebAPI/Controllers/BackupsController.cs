@@ -1,10 +1,12 @@
 ﻿using DeniMetrics.WebAPI.Attributes;
 using DineMetrics.BLL.Services.Interfaces;
+using DineMetrics.Core.Enums;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DeniMetrics.WebAPI.Controllers;
 
 [Authorize]
+[PermissionAuthorize(ManagementName.BackupsManagement, PermissionAccess.Full)]
 public class BackupsController(ISettingsBackupService settingsBackupService) : BaseController
 {
     // GET: api/backups/eatery/5

@@ -8,7 +8,7 @@ namespace DineMetrics.Core.Models
 
         public string PasswordHash { get; set; } = null!;
 
-        public UserRole Role { get; set; } = UserRole.Manager;
+        public UserRole Role { get; set; } = UserRole.FacilityManager;
         
         public DateOnly? AppointmentDate { get; set; }
         

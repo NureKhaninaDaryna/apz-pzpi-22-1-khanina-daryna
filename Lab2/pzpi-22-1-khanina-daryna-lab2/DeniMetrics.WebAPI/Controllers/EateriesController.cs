@@ -1,5 +1,6 @@
 ﻿using DeniMetrics.WebAPI.Attributes;
 using DineMetrics.Core.Dto;
+using DineMetrics.Core.Enums;
 using DineMetrics.Core.Models;
 using DineMetrics.DAL.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -17,6 +18,7 @@ public class EateriesController : BaseController
     }
     
     [HttpGet]
+    [PermissionAuthorize(ManagementName.EateriesManagement, PermissionAccess.Read)]
     public async Task<ActionResult<List<EateryWithIdDto>>> GetAll()
     {
         var eateries = await _eateryRepository.GetAllAsync();
@@ -37,6 +39,7 @@ public class EateriesController : BaseController
     }
     
     [HttpGet("{id}")]
+    [PermissionAuthorize(ManagementName.EateriesManagement, PermissionAccess.Read)]
     public async Task<ActionResult<EateryWithIdDto>> GetById(int id)
     {
         var result = await _eateryRepository.GetByIdAsync(id);
@@ -58,6 +61,7 @@ public class EateriesController : BaseController
     }
     
     [HttpPost]
+    [PermissionAuthorize(ManagementName.EateriesManagement, PermissionAccess.Full)]
     public async Task<ActionResult<int>> Create([FromBody] EateryDto dto)
     {
         var eatery = new Eatery
@@ -77,6 +81,7 @@ public class EateriesController : BaseController
     }
     
     [HttpPut("{id}")]
+    [PermissionAuthorize(ManagementName.EateriesManagement, PermissionAccess.Full)]
     public async Task<ActionResult> Update(int id, [FromBody] EateryDto dto)
     {
         var existingEatery = await _eateryRepository.GetByIdAsync(id);
@@ -98,6 +103,7 @@ public class EateriesController : BaseController
     }
 
     [HttpDelete("{id}")]
+    [PermissionAuthorize(ManagementName.EateriesManagement, PermissionAccess.Full)]
     public async Task<ActionResult> Delete(int id)
     {
         await _eateryRepository.RemoveByIdAsync(id);

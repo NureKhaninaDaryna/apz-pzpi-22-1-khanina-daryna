@@ -39,12 +39,13 @@ public class AuthenticationService : IAuthenticationService
         {
             Email = email,
             PasswordHash = passwordHash,
-            Role = isAdmin ? UserRole.Admin : UserRole.Manager,
+            Role = isAdmin ? UserRole.Admin : UserRole.FacilityManager,
         };
         
-        var userDto = new UserDto()
+        var userDto = new UserDto
         {
-            Email = email
+            Email = email,
+            Role = user.Role
         };
 
         try

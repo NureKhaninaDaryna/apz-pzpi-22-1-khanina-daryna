@@ -1,5 +1,6 @@
 ﻿using DeniMetrics.WebAPI.Attributes;
 using DineMetrics.BLL.Services.Interfaces;
+using DineMetrics.Core.Enums;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DeniMetrics.WebAPI.Controllers;
@@ -15,6 +16,7 @@ public class AnalyticsController : BaseController
     }
     
     [HttpGet("dashboard-metrics")]
+    [PermissionAuthorize(ManagementName.AnalyticsManagement, PermissionAccess.Read)]
     public async Task<IActionResult> GetDashboardMetrics([FromQuery] DateTime from, [FromQuery] DateTime to)
     {
         var result = await _analyticsService.GetDashboardMetrics(from, to);
@@ -31,6 +33,7 @@ public class AnalyticsController : BaseController
     }
     
     [HttpGet("trends/{facilityId:int}")]
+    [PermissionAuthorize(ManagementName.AnalyticsManagement, PermissionAccess.Read)]
     public async Task<IActionResult> GenerateTrends(int facilityId)
     {
         var result = await _analyticsService.GenerateTrends(facilityId);

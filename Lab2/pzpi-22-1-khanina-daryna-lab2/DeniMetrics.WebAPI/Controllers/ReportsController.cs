@@ -2,13 +2,14 @@
 using DeniMetrics.WebAPI.Attributes;
 using DineMetrics.BLL.Helpers;
 using DineMetrics.Core.Dto;
+using DineMetrics.Core.Enums;
 using DineMetrics.Core.Models;
 using DineMetrics.DAL.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DeniMetrics.WebAPI.Controllers;
 
-// [Authorize]
+[Authorize]
 public class ReportsController : BaseController
 {
     private readonly IRepository<Report> _reportRepository;
@@ -19,6 +20,7 @@ public class ReportsController : BaseController
     }
 
     [HttpGet]
+    [PermissionAuthorize(ManagementName.AnalyticsManagement, PermissionAccess.Read)]
     public async Task<ActionResult<List<ReportDto>>> GetAll()
     {
         var reports = await _reportRepository.GetAllAsync();
@@ -34,6 +36,7 @@ public class ReportsController : BaseController
     }
 
     [HttpGet("{id}")]
+    [PermissionAuthorize(ManagementName.AnalyticsManagement, PermissionAccess.Read)]
     public async Task<ActionResult<ReportDto>> GetById(int id)
     {
         var result = await _reportRepository.GetByIdAsync(id);
@@ -50,6 +53,7 @@ public class ReportsController : BaseController
     }
     
     [HttpPost("download")]
+    [PermissionAuthorize(ManagementName.AnalyticsManagement, PermissionAccess.Full)]
     public async Task<IActionResult> GetReportsByDateRange(ReportDownloadDto model)
     {
         if (model.EndDate < model.StartDate)

@@ -1,6 +1,7 @@
 ﻿using DeniMetrics.WebAPI.Attributes;
 using DineMetrics.BLL.Services.Interfaces;
 using DineMetrics.Core.Dto;
+using DineMetrics.Core.Enums;
 using DineMetrics.Core.Models;
 using DineMetrics.DAL.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +27,7 @@ public class CustomerMetricsController : BaseController
 
     [HttpGet]
     [Authorize]
+    [PermissionAuthorize(ManagementName.MetricsManagement, PermissionAccess.Read)]
     public async Task<ActionResult<List<CustomerMetricDto>>> GetAll()
     {
         var customerMetrics = await _customerMetricRepository.GetAllAsync();
@@ -42,6 +44,7 @@ public class CustomerMetricsController : BaseController
 
     [HttpGet("{id}")]
     [Authorize]
+    [PermissionAuthorize(ManagementName.MetricsManagement, PermissionAccess.Read)]
     public async Task<ActionResult<CustomerMetricDto>> GetById(int id)
     {
         var result = await _customerMetricRepository.GetByIdAsync(id);
@@ -83,6 +86,7 @@ public class CustomerMetricsController : BaseController
 
     [HttpDelete("{id}")]
     [Authorize]
+    [PermissionAuthorize(ManagementName.MetricsManagement, PermissionAccess.Full)]
     public async Task<ActionResult> Delete(int id)
     {
         await _customerMetricRepository.RemoveByIdAsync(id);
