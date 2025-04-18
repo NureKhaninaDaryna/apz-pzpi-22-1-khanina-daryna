@@ -12,7 +12,7 @@ public static class ModelBuilderExtensions
         {
             Id = 1,
             Email = "admin@gmail.com",
-            PasswordHash = "7f5b3331091e4db703d6d6ab8a8039ee4f11599f1d2386619b2b55c784361562",
+            PasswordHash = "83fcd3f7129b081faeb043dc07262e63fea599da4be6869a7a1780f7084a15b4",
             Role = UserRole.Admin,
             AppointmentDate = new DateOnly(2022, 11, 28)
         };

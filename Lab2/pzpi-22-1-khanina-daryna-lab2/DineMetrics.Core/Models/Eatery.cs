@@ -16,6 +16,8 @@ namespace DineMetrics.Core.Models
 
         public virtual ICollection<User> Managers { get; set; } = new List<User>();
         
+        public virtual ICollection<EaterySettingsBackup> EaterySettingsBackups { get; set; } = new List<EaterySettingsBackup>();
+        
         public string OperatingHours { get; set; } = "08:00-22:00"; // Формат HH:mm-HH:mm
         
         public int MaximumCapacity { get; set; } = 100; // Максимальна кількість відвідувачів

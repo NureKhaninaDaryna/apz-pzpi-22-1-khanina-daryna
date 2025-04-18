@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DineMetrics.DAL;
 
-public class AppDbContext : DbContext
+public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
     public DbSet<User> Users { get; set; } = null!;
     
@@ -20,10 +20,8 @@ public class AppDbContext : DbContext
     
     public DbSet<Employee> Employees { get; set; } = null!;
     
-    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
-    {
-    }
-    
+    public DbSet<EaterySettingsBackup> EaterySettingsBackups { get; set; } = null!;
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         if (!optionsBuilder.IsConfigured)

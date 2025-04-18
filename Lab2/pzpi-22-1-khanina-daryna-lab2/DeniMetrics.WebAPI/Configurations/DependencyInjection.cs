@@ -34,6 +34,7 @@ public static class DependencyInjection
         services.AddScoped<IEateryService, EateryService>();
         services.AddScoped<IEmailService, EmailService>();
         services.AddScoped<IMetricService, MetricService>();
+        services.AddScoped<ISettingsBackupService, SettingsBackupService>();
         services.AddScoped<TokenService>();
 
         services.Configure<AppSettings>(configuration.GetSection("AppSettings"));
