@@ -1,5 +1,6 @@
 ﻿using DeniMetrics.WebAPI.Attributes;
 using DineMetrics.BLL.Services.Interfaces;
+using DineMetrics.Core.Dto;
 using DineMetrics.Core.Enums;
 using Microsoft.AspNetCore.Mvc;
 
@@ -46,6 +47,27 @@ public class AnalyticsController : BaseController
             return BadRequest(new { Message = result.Error?.Message });
         }
 
+        return Ok(result.Value);
+    }
+    
+    [HttpGet("recommendations")]
+    public async Task<ActionResult<PeakLoadRecommendationDto>> GetRecommendations(int eateryId, DateTime from, DateTime to)
+    {
+        var result = await _analyticsService.GetPeakLoadRecommendations(eateryId, from, to);
+        return Ok(result.Value);
+    }
+
+    [HttpGet("anomalies")]
+    public async Task<ActionResult<AnomalyDetectionDto>> GetAnomalies(int eateryId, DateTime from, DateTime to)
+    {
+        var result = await _analyticsService.DetectAnomalies(eateryId, from, to);
+        return Ok(result.Value);
+    }
+
+    [HttpGet("forecast")]
+    public async Task<ActionResult<LoadForecastDto>> GetForecast(int eateryId, int daysAhead)
+    {
+        var result = await _analyticsService.ForecastLoad(eateryId, daysAhead);
         return Ok(result.Value);
     }
 }
