@@ -50,7 +50,7 @@ public class AnalyticsService(
                 .Select(g => new TrendAnalysisDto
                 {
                     Date = g.Key,
-                    AverageValue = g.Average(m => m.Value)
+                    AverageValue = Math.Truncate(g.Average(m => m.Value) * 10) / 10
                 }).ToList();
 
             return ServiceResult<List<TrendAnalysisDto>>.Success(trends);

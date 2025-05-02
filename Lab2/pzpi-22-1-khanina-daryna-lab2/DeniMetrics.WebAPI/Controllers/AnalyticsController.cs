@@ -35,7 +35,7 @@ public class AnalyticsController : BaseController
     
     [HttpGet("trends/{facilityId:int}")]
     [PermissionAuthorize(ManagementName.AnalyticsManagement, PermissionAccess.Read)]
-    public async Task<IActionResult> GenerateTrends(int facilityId)
+    public async Task<ActionResult<List<TrendAnalysisDto>>> GenerateTrends(int facilityId)
     {
         var result = await _analyticsService.GenerateTrends(facilityId);
 

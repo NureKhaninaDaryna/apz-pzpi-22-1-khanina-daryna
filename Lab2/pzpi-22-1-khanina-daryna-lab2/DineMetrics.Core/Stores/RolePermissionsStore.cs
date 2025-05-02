@@ -28,6 +28,7 @@ public static class RolePermissionsStore
 
         // Analyst — доступ до аналітики
         new(PermissionAccess.Read, UserRole.Analyst, ManagementName.AnalyticsManagement),
+        new(PermissionAccess.Read, UserRole.Analyst, ManagementName.EateriesManagement),
 
         // Viewer — тільки читання до всього
         new(PermissionAccess.Read, UserRole.Viewer, ManagementName.AnalyticsManagement),
