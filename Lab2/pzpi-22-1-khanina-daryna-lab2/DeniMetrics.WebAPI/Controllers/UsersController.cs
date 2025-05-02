@@ -30,7 +30,7 @@ public class UsersController : BaseController
         
         var token = _tokenService.CreateToken(currentUser);
         
-        return new AuthenticateResponseDto(currentUser, token);
+        return new AuthenticateResponseDto(currentUser, token, currentUser.Role);
     }
 
     [HttpPost("register")]

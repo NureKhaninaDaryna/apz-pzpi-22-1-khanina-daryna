@@ -78,7 +78,7 @@ public class AuthenticationService : IAuthenticationService
         
         var token = _jwtService.GenerateJwtToken(user);
 
-        return ServiceResult<AuthenticateResponseDto>.Success(new AuthenticateResponseDto(user, token));
+        return ServiceResult<AuthenticateResponseDto>.Success(new AuthenticateResponseDto(user, token, user.Role));
     }
 
     public async Task<ServiceResult> ChangePassword(int userId, string currentPassword, string newPassword)

@@ -18,7 +18,7 @@ public class AnalyticsController : BaseController
     
     [HttpGet("dashboard-metrics")]
     [PermissionAuthorize(ManagementName.AnalyticsManagement, PermissionAccess.Read)]
-    public async Task<IActionResult> GetDashboardMetrics([FromQuery] DateTime from, [FromQuery] DateTime to)
+    public async Task<ActionResult<DashboardDataDto>> GetDashboardMetrics([FromQuery] DateTime from, [FromQuery] DateTime to)
     {
         var result = await _analyticsService.GetDashboardMetrics(from, to);
 
