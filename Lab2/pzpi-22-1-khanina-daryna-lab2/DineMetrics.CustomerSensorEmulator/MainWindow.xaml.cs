@@ -23,8 +23,8 @@ public partial class MainWindow : Window
     private readonly Random _random = new();
 
     // Константи
-    private const string CustomerMetricsUrl = "https://localhost:7239/CustomerMetrics";
-    private const string DeviceId = "83242380-277b-40d5-82a4-cfc5663d4994";
+    private const string CustomerMetricsUrl = "http://localhost:5048/CustomerMetrics";
+    private const int DeviceId = 1;
     
     public MainWindow()
     {

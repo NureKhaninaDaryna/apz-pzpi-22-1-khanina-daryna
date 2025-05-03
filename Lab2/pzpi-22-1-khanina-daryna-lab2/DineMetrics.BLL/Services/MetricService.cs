@@ -1,8 +1,10 @@
-﻿using DineMetrics.BLL.Services.Interfaces;
+﻿using DineMetrics.BLL.Hubs;
+using DineMetrics.BLL.Services.Interfaces;
 using DineMetrics.Core.Enums;
 using DineMetrics.Core.Models;
 using DineMetrics.Core.Shared;
 using DineMetrics.DAL.Repositories;
+using Microsoft.AspNetCore.SignalR;
 
 namespace DineMetrics.BLL.Services;
 
@@ -13,19 +15,22 @@ public class MetricService : IMetricService
     private readonly IRepository<Report> _reportRepository;
     private readonly IRepository<User> _userRepository;
     private readonly IEmailService _emailService;
+    private readonly IHubContext<NotificationHub> _notificationHub;
 
     public MetricService(
         IRepository<CustomerMetric> customerMetricRepository, 
         IRepository<TemperatureMetric> temperatureMetricRepository,
         IRepository<Report> reportRepository,
         IRepository<User> userRepository,
-        IEmailService emailService)
+        IEmailService emailService,
+        IHubContext<NotificationHub> notificationHub)
     {
         _customerMetricRepository = customerMetricRepository;
         _temperatureMetricRepository = temperatureMetricRepository;
         _reportRepository = reportRepository;
         _userRepository = userRepository;
         _emailService = emailService;
+        _notificationHub = notificationHub;
     }
     
     public async Task<ServiceResult> CreateTemperatureMetric(TemperatureMetric metric)
@@ -128,26 +133,40 @@ public class MetricService : IMetricService
         var eatery = customerMetric != null 
             ? customerMetric.Device.Eatery 
             : temperatureMetric!.Device.Eatery;
-
         
         if (customerMetric != null && eatery.MaximumCapacity < report.TotalCustomers)
         {
-            var admins = await _userRepository.GetByPredicateAsync(u => u.Role == UserRole.Admin);
-
-            foreach (var admin in admins)
-            {
-                await _emailService.SendEmailAsync(admin.Email, "Customer Report", $"Now at eatery: {eatery.Name}, customers: {report.TotalCustomers}. This more than: {eatery.MaximumCapacity} capacity.");
-            }
+            await _notificationHub.Clients.All.SendAsync("ReceiveNotification", new {
+                Title = "Customer Report",
+                Message = $"Now at eatery: {eatery.Name}, customers: {report.TotalCustomers}. This more than: {eatery.MaximumCapacity} capacity."
+            });
         }
 
         if (temperatureMetric != null && eatery.TemperatureThreshold > report.AverageTemperature)
         {
-            var admins = await _userRepository.GetByPredicateAsync(u => u.Role == UserRole.Admin);
-
-            foreach (var admin in admins)
-            {
-                await _emailService.SendEmailAsync(admin.Email, "Temperature Report", $"Now at eatery: {eatery.Name}, temperature: +{report.AverageTemperature}. This less than: +{eatery.TemperatureThreshold}.");
-            }
+            await _notificationHub.Clients.All.SendAsync("ReceiveNotification", new {
+                Title = "Temperature Report",
+                Message = $"Now at eatery: {eatery.Name}, temperature: +{report.AverageTemperature}. This less than: +{eatery.TemperatureThreshold}."
+            });
         }
+        // if (customerMetric != null && eatery.MaximumCapacity < report.TotalCustomers)
+        // {
+        //     var admins = await _userRepository.GetByPredicateAsync(u => u.Role == UserRole.Admin);
+        //
+        //     foreach (var admin in admins)
+        //     {
+        //         await _emailService.SendEmailAsync(admin.Email, "Customer Report", $"Now at eatery: {eatery.Name}, customers: {report.TotalCustomers}. This more than: {eatery.MaximumCapacity} capacity.");
+        //     }
+        // }
+        //
+        // if (temperatureMetric != null && eatery.TemperatureThreshold > report.AverageTemperature)
+        // {
+        //     var admins = await _userRepository.GetByPredicateAsync(u => u.Role == UserRole.Admin);
+        //
+        //     foreach (var admin in admins)
+        //     {
+        //         await _emailService.SendEmailAsync(admin.Email, "Temperature Report", $"Now at eatery: {eatery.Name}, temperature: +{report.AverageTemperature}. This less than: +{eatery.TemperatureThreshold}.");
+        //     }
+        // }
     }
 }

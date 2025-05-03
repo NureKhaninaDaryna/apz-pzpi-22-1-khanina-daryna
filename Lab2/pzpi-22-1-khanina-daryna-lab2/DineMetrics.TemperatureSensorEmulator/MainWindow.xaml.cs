@@ -14,9 +14,9 @@ public partial class MainWindow : Window
     private bool _isReading;
     private readonly Random _random = new();
     
-    private const string TemperatureMetricsUrl = "https://localhost:7239/TemperatureMetrics";
-    private const string DeviceGetSecondsDelay = $"https://localhost:7239/Devices/{DeviceId}/delay";
-    private const string DeviceId = "83242380-277b-40d5-82a4-cfc5663d4994";
+    private const string TemperatureMetricsUrl = "http://localhost:5048/TemperatureMetrics";
+    private const string DeviceGetSecondsDelay = $"http://localhost:5048/Devices/1/delay";
+    private const int DeviceId = 1;
     
     private int _secondsDelay = 5;
     

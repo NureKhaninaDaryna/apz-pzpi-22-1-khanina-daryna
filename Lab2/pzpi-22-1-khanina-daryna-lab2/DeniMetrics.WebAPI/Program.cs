@@ -2,6 +2,7 @@ using System.Text.Json.Serialization;
 using DeniMetrics.WebAPI.Configurations;
 using DeniMetrics.WebAPI.Middlewares;
 using DeniMetrics.WebAPI.Validators;
+using DineMetrics.BLL.Hubs;
 using FluentValidation.AspNetCore;
 using Microsoft.OpenApi.Models;
 
@@ -18,6 +19,8 @@ builder.Configuration.AddConfiguration(configuration);
 builder.Services
     .AddInfrastructure()
     .AddCustomIdentity(configuration);
+
+builder.Services.AddSignalR();
 
 // Add Swagger services
 builder.Services.AddSwaggerGen(options =>
@@ -103,11 +106,14 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseCors("AllowReactApp");
+app.UseCors("CorsPolicy");
 app.UseAuthorization();
 
 app.UseMiddleware<JwtMiddleware>();
 app.UseMiddleware<ExceptionsHandlingMiddleware>();
 
 app.MapControllers();
+
+app.MapHub<NotificationHub>("/hub/notifications");
 
 app.Run();
