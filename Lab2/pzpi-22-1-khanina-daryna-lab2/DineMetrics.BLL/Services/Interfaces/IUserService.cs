@@ -10,4 +10,5 @@ public interface IUserService
     Task<User?> GetUserById(int id);
     Task<bool> IsFreeEmail(string email);
     Task<UserDto?> ChangeRole(int userId, UserRole role);
+    Task<List<UserWithIdDto>> GetUsers();
 }

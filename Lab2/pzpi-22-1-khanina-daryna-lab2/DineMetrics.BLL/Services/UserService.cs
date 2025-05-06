@@ -40,4 +40,11 @@ public class UserService : IUserService
         
         return new UserDto { Email = user.Email, Role = user.Role };
     }
+
+    public async Task<List<UserWithIdDto>> GetUsers()
+    {
+        var users = await _repository.GetAllAsync();
+        
+        return users.Select(user => new UserWithIdDto { Email = user.Email, Id = user.Id, Role = user.Role }).ToList();
+    }
 }

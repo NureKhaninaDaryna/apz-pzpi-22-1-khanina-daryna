@@ -33,6 +33,13 @@ public class UsersController : BaseController
         return new AuthenticateResponseDto(currentUser, token, currentUser.Role);
     }
 
+    [HttpGet("all")]
+    [PermissionAuthorize(ManagementName.UsersManagement, PermissionAccess.Full)]
+    public async Task<ActionResult<List<UserWithIdDto>>> GetAllUsers()
+    {
+        return await _userService.GetUsers();
+    }
+
     [HttpPost("register")]
     public async Task<ActionResult<UserDto>> Register([FromBody] RegisterRequest model)
     {
@@ -55,7 +62,7 @@ public class UsersController : BaseController
     [HttpPatch("update-role")]
     [Authorize]
     [PermissionAuthorize(ManagementName.UsersManagement, PermissionAccess.Full)]
-    public async Task<ActionResult<UserDto>> UpdateRole([FromQuery] UpdateRoleDto dto)
+    public async Task<ActionResult<UserDto>> UpdateRole([FromBody] UpdateRoleDto dto)
     {
         var currentUser = (User?)HttpContext.Items["User"];
         
