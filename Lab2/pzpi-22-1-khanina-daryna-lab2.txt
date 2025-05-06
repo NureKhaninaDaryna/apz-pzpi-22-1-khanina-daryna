@@ -8,7 +8,6 @@
 
 
 
-
 Кафедра ПІ
 
 
@@ -74,10 +73,10 @@
 
 ДОДАТОК А
 
-Відеозапис
-Відеозапис презентації результатів лабораторної роботи: https://www.youtube.com/watch?v=yWNPf3em9lk
+Посилання на відеозапис доповіді на YouTube: 
+https://www.youtube.com/watch?v=yWNPf3em9lk
 
-Хронологічний опис відеозапису:
+Хронологічний опис:
 00:00 - Вступ 
 00:09 - Мета лабораторної роботи 
 00:22 - Резервне копіювання 
@@ -114,22 +113,37 @@
 
 ДОДАТОК Б
 
-Резервне копіювання
+
+
+
+Рисунок Б.1 — ER-діаграма даних
+
+
+
+Рисунок Б.2 — Структура бази даних
+
+
+
+
+
+Рисунок Б.3 — UML-діаграма прецедентів
+
+Резервне копіювання користувацьких даних
 
 Було реалізовано сервіс резервного копіювання налаштувань IoT-закладу, який дозволяє зберігати поточні конфігурації (години роботи, максимальна місткість, температурний поріг) у вигляді окремих резервних записів з можливістю подальшого відновлення. Для цього створено окрему сутність EaterySettingsBackup та сервіс SettingsBackupService, який реалізує CRUD-операції над резервами.
 
-Модель резервного копіювання - https://github.com/NureKhaninaDaryna/apz-pzpi-22-1-khanina-daryna/blob/main/Lab2/pzpi-22-1-khanina-daryna-lab2/DineMetrics.Core/Models/EaterySettingsBackup.cs
+Модель резервного копіювання - GitHub репозиторій: https://github.com/NureKhaninaDaryna/apz-pzpi-22-1-khanina-daryna/blob/main/Lab2/pzpi-22-1-khanina-daryna-lab2/DineMetrics.Core/Models/EaterySettingsBackup.cs
 
-Контроллер для резервного копіювання - https://github.com/NureKhaninaDaryna/apz-pzpi-22-1-khanina-daryna/blob/main/Lab2/pzpi-22-1-khanina-daryna-lab2/DeniMetrics.WebAPI/Controllers/BackupsController.cs
+Контроллер для резервного копіювання - GitHub репозиторій: https://github.com/NureKhaninaDaryna/apz-pzpi-22-1-khanina-daryna/blob/main/Lab2/pzpi-22-1-khanina-daryna-lab2/DeniMetrics.WebAPI/Controllers/BackupsController.cs
 
-Контракт для резервного копіювання -  https://github.com/NureKhaninaDaryna/apz-pzpi-22-1-khanina-daryna/blob/main/Lab2/pzpi-22-1-khanina-daryna-lab2/DineMetrics.BLL/Services/Interfaces/ISettingsBackupService.cs
+Контракт для резервного копіювання -  GitHub репозиторій: https://github.com/NureKhaninaDaryna/apz-pzpi-22-1-khanina-daryna/blob/main/Lab2/pzpi-22-1-khanina-daryna-lab2/DineMetrics.BLL/Services/Interfaces/ISettingsBackupService.cs
 
-Сервіс для резервного копіювання - https://github.com/NureKhaninaDaryna/apz-pzpi-22-1-khanina-daryna/blob/main/Lab2/pzpi-22-1-khanina-daryna-lab2/DineMetrics.BLL/Services/SettingsBackupService.cs
+Сервіс для резервного копіювання - GitHub репозиторій: https://github.com/NureKhaninaDaryna/apz-pzpi-22-1-khanina-daryna/blob/main/Lab2/pzpi-22-1-khanina-daryna-lab2/DineMetrics.BLL/Services/SettingsBackupService.cs
 
-Нова міграція для резервного копіювання- https://github.com/NureKhaninaDaryna/apz-pzpi-22-1-khanina-daryna/blob/main/Lab2/pzpi-22-1-khanina-daryna-lab2/DineMetrics.DAL/Migrations/20250416052442_AddEaterySettingsBackupsTable.cs
+Нова міграція для резервного копіювання- GitHub репозиторій: https://github.com/NureKhaninaDaryna/apz-pzpi-22-1-khanina-daryna/blob/main/Lab2/pzpi-22-1-khanina-daryna-lab2/DineMetrics.DAL/Migrations/20250416052442_AddEaterySettingsBackupsTable.cs
 
 
-Реалізація системи керування доступом на основі ролей (RBAC)
+Адміністрування бізнес-логіки системи. Реалізація системи керування доступом на основі ролей (RBAC)
 У рамках проекту було впроваджено систему керування доступом до функціоналу платформи відповідно до ролі користувача та рівня доступу. Це дозволяє забезпечити гнучкий контроль над тим, які користувачі можуть бачити або змінювати певні частини системи.
 1. Ролі користувачів
 Було визначено п’ять основних ролей:
@@ -193,9 +207,9 @@ Read – лише перегляд даних.
 У процесі реалізації було виявлено, що всі дозволи у списку AllPermissions були однакові. Це було пов’язано з відсутністю публічного конструктора в класі RolePermission. Після додавання конструктора з параметрами (Access, Role, Management) — система почала коректно ініціалізувати унікальні об’єкти для кожного дозволу.
 
 
-Логіка для пермісій -  https://github.com/NureKhaninaDaryna/apz-pzpi-22-1-khanina-daryna/blob/main/Lab2/pzpi-22-1-khanina-daryna-lab2/DeniMetrics.WebAPI/Attributes/PermissionAuthorizeAttribute.cs
+Логіка для пермісій -  GitHub репозиторій: https://github.com/NureKhaninaDaryna/apz-pzpi-22-1-khanina-daryna/blob/main/Lab2/pzpi-22-1-khanina-daryna-lab2/DeniMetrics.WebAPI/Attributes/PermissionAuthorizeAttribute.cs
 
-Створено математичну обробку даних для побудови аналітики та рекомендацій (розрахунок трендів, середніх значень, відхилень)
+Математична обробка прикладних даних. Створено математичну обробку даних для побудови аналітики та рекомендацій (розрахунок трендів, середніх значень, відхилень)
 
 Математична обробка даних - 
-https://github.com/NureKhaninaDaryna/apz-pzpi-22-1-khanina-daryna/blob/main/Lab2/pzpi-22-1-khanina-daryna-lab2/DineMetrics.BLL/Services/AnalyticsService.cs
+GitHub репозиторій: https://github.com/NureKhaninaDaryna/apz-pzpi-22-1-khanina-daryna/blob/main/Lab2/pzpi-22-1-khanina-daryna-lab2/DineMetrics.BLL/Services/AnalyticsService.cs
