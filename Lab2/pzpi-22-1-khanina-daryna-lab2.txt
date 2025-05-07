@@ -36,7 +36,6 @@
 
 
 Харків 2025 р.
-ЛАБОРАТОРНА РОБОТА №1
 
 1 ІСТОРІЯ ЗМІН
 
@@ -52,14 +51,84 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 2 ЗАВДАННЯ
 
 Внести зміни в серверну частину програми.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 3 ОПИС ВИКОНАНОЇ РОБОТИ
 
 Було обрано тему роботи – «Програмна система збору статистики для закладів харчування DineMetrics».
 Оноволина серверну частину (див. додаток Б) для обраної теми проекту. Створила відеозапис (див. додаток А) з демонстрацією написаного документа з описаним проектом.
+Було реалізовано сервіс резервного копіювання налаштувань IoT-закладу, який дозволяє зберігати поточні конфігурації (години роботи, максимальна місткість, температурний поріг) у вигляді окремих резервних записів з можливістю подальшого відновлення. Для цього створено окрему сутність EaterySettingsBackup та сервіс SettingsBackupService, який реалізує CRUD-операції над резервами.
+Створено математичну обробку даних для побудови аналітики та рекомендацій (розрахунок трендів, середніх значень, відхилень)
+У рамках проекту було впроваджено систему керування доступом до функціоналу платформи відповідно до ролі користувача та рівня доступу. Це дозволяє забезпечити гнучкий контроль над тим, які користувачі можуть бачити або змінювати певні частини системи.
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 4 ВИСНОВКИ
 
@@ -71,12 +140,41 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ДОДАТОК А
+Відеозапис
+Відеозапис презентації результатів лабораторної роботи: https://www.youtube.com/watch?v=yWNPf3em9lk
 
-Посилання на відеозапис доповіді на YouTube: 
-https://www.youtube.com/watch?v=yWNPf3em9lk
+Хронологічний опис відеозапису:
 
-Хронологічний опис:
 00:00 - Вступ 
 00:09 - Мета лабораторної роботи 
 00:22 - Резервне копіювання 
@@ -128,88 +226,199 @@ https://www.youtube.com/watch?v=yWNPf3em9lk
 
 Рисунок Б.3 — UML-діаграма прецедентів
 
-Резервне копіювання користувацьких даних
-
-Було реалізовано сервіс резервного копіювання налаштувань IoT-закладу, який дозволяє зберігати поточні конфігурації (години роботи, максимальна місткість, температурний поріг) у вигляді окремих резервних записів з можливістю подальшого відновлення. Для цього створено окрему сутність EaterySettingsBackup та сервіс SettingsBackupService, який реалізує CRUD-операції над резервами.
-
-Модель резервного копіювання - GitHub репозиторій: https://github.com/NureKhaninaDaryna/apz-pzpi-22-1-khanina-daryna/blob/main/Lab2/pzpi-22-1-khanina-daryna-lab2/DineMetrics.Core/Models/EaterySettingsBackup.cs
-
-Контроллер для резервного копіювання - GitHub репозиторій: https://github.com/NureKhaninaDaryna/apz-pzpi-22-1-khanina-daryna/blob/main/Lab2/pzpi-22-1-khanina-daryna-lab2/DeniMetrics.WebAPI/Controllers/BackupsController.cs
-
-Контракт для резервного копіювання -  GitHub репозиторій: https://github.com/NureKhaninaDaryna/apz-pzpi-22-1-khanina-daryna/blob/main/Lab2/pzpi-22-1-khanina-daryna-lab2/DineMetrics.BLL/Services/Interfaces/ISettingsBackupService.cs
-
-Сервіс для резервного копіювання - GitHub репозиторій: https://github.com/NureKhaninaDaryna/apz-pzpi-22-1-khanina-daryna/blob/main/Lab2/pzpi-22-1-khanina-daryna-lab2/DineMetrics.BLL/Services/SettingsBackupService.cs
-
-Нова міграція для резервного копіювання- GitHub репозиторій: https://github.com/NureKhaninaDaryna/apz-pzpi-22-1-khanina-daryna/blob/main/Lab2/pzpi-22-1-khanina-daryna-lab2/DineMetrics.DAL/Migrations/20250416052442_AddEaterySettingsBackupsTable.cs
 
 
-Адміністрування бізнес-логіки системи. Реалізація системи керування доступом на основі ролей (RBAC)
-У рамках проекту було впроваджено систему керування доступом до функціоналу платформи відповідно до ролі користувача та рівня доступу. Це дозволяє забезпечити гнучкий контроль над тим, які користувачі можуть бачити або змінювати певні частини системи.
-1. Ролі користувачів
-Було визначено п’ять основних ролей:
-Admin – повний доступ до всієї системи.
 
 
-FacilityManager – управління закладами, пристроями, метриками, персоналом.
 
 
-Staff – доступ лише на читання до даних закладу та метрик.
 
 
-Analyst – доступ лише до аналітики.
 
 
-Viewer – глобальний доступ лише на читання до більшості модулів.
 
 
-2. Доступи до функціональності
-Було створено перерахування PermissionAccess із двома рівнями:
-Full – повний доступ (читання + редагування),
 
 
-Read – лише перегляд даних.
 
 
-3. Керовані модулі
-Система підтримує контроль доступу до таких частин:
-Аналітика (AnalyticsManagement),
+ДОДАТОК В
+Програмний код
 
+В.1 Математична обробка прикладних даних
 
-Заклади (EateriesManagement),
-
-
-Метрики (MetricsManagement),
-
-
-Резервні копії (BackupsManagement),
-
-
-Пристрої (DevicesManagement),
-
-
-Персонал (EmployeesManagement),
-
-
-Користувачі (UsersManagement).
-
-
-4. Статична колекція прав доступу
-Було реалізовано клас RolePermissionsStore, який містить колекцію AllPermissions, що визначає допустимі поєднання ролей, модулів і рівнів доступу. Для кожної ролі чітко задано, до яких модулів вона має доступ, і в якому режимі (повний або тільки читання).
-5. Атрибут авторизації
-Було реалізовано атрибут PermissionAuthorizeAttribute, який дозволяє обмежити доступ до методів контролерів на основі ролі користувача. Атрибут перевіряє:
-роль користувача (отримується з HTTP-контексту),
-
-
-чи має він дозвіл на вказаний модуль із потрібним рівнем доступу.
-
-
-6. Виправлення проблеми з авторизацією
-У процесі реалізації було виявлено, що всі дозволи у списку AllPermissions були однакові. Це було пов’язано з відсутністю публічного конструктора в класі RolePermission. Після додавання конструктора з параметрами (Access, Role, Management) — система почала коректно ініціалізувати унікальні об’єкти для кожного дозволу.
-
-
-Логіка для пермісій -  GitHub репозиторій: https://github.com/NureKhaninaDaryna/apz-pzpi-22-1-khanina-daryna/blob/main/Lab2/pzpi-22-1-khanina-daryna-lab2/DeniMetrics.WebAPI/Attributes/PermissionAuthorizeAttribute.cs
-
-Математична обробка прикладних даних. Створено математичну обробку даних для побудови аналітики та рекомендацій (розрахунок трендів, середніх значень, відхилень)
-
-Математична обробка даних - 
 GitHub репозиторій: https://github.com/NureKhaninaDaryna/apz-pzpi-22-1-khanina-daryna/blob/main/Lab2/pzpi-22-1-khanina-daryna-lab2/DineMetrics.BLL/Services/AnalyticsService.cs
+
+
+1.     public async Task<ServiceResult<PeakLoadRecommendationDto>> GetPeakLoadRecommendations(int eateryId, DateTime from, DateTime to)
+2.     {
+3.         var metrics = await customerMetricRepository.GetByPredicateAsync(m =>
+4.             m.Device.Eatery.Id == eateryId && m.Time >= from && m.Time <= to);
+5. 
+6.         var grouped = metrics
+7.             .GroupBy(m => m.Time.Hour)
+8.             .Select(g => new { Hour = g.Key, AverageVisitors = g.Average(m => m.Count) })
+9.             .OrderByDescending(x => x.AverageVisitors)
+10.             .ToList();
+11. 
+12.         var peakHours = grouped.Take(3).Select(x => x.Hour).ToList();
+13. 
+14.         return ServiceResult<PeakLoadRecommendationDto>.Success(new PeakLoadRecommendationDto
+15.         {
+16.             RecommendedStaffIncreaseHours = peakHours
+17.         });
+18.     }
+19. 
+20.     public async Task<ServiceResult<AnomalyDetectionDto>> DetectAnomalies(int eateryId, DateTime from, DateTime to)
+21.     {
+22.         var metrics = await temperatureMetricRepository.GetByPredicateAsync(m =>
+23.             m.Device.Eatery.Id == eateryId && m.Time >= from && m.Time <= to);
+24. 
+25.         var average = metrics.Average(m => m.Value);
+26.         var stdDev = Math.Sqrt(metrics.Average(m => Math.Pow(m.Value - average, 2)));
+27. 
+28.         var anomalies = metrics
+29.             .Where(m => Math.Abs(m.Value - average) > 2 * stdDev)
+30.             .ToList();
+31. 
+32.         return ServiceResult<AnomalyDetectionDto>.Success(new AnomalyDetectionDto
+33.         {
+34.             AnomalyTimestamps = anomalies.Select(a => a.Time).ToList(),
+35.             Threshold = average,
+36.             StandardDeviation = stdDev
+37.         });
+38.     }
+39. 
+40.     public async Task<ServiceResult<LoadForecastDto>> ForecastLoad(int eateryId, int daysAhead)
+41.     {
+42.         var metrics = await customerMetricRepository.GetByPredicateAsync(m => m.Device.Eatery.Id == eateryId);
+43.         var dailyGroups = metrics.GroupBy(m => m.Time.Date)
+44.             .Select(g => new { Date = g.Key, Count = g.Sum(m => m.Count) })
+45.             .OrderBy(g => g.Date)
+46.             .ToList();
+47. 
+48.         var averageLoad = dailyGroups.Average(x => x.Count);
+49. 
+50.         var forecast = new List<ForecastDay>();
+51.         for (var i = 1; i <= daysAhead; i++)
+52.         {
+53.             forecast.Add(new ForecastDay
+54.             {
+55.                 Date = DateTime.Today.AddDays(i),
+56.                 ExpectedVisitors = (int)(averageLoad + (i % 3 == 0 ? 20 : 0))
+57.             });
+58.         }
+59. 
+60.         return ServiceResult<LoadForecastDto>.Success(new LoadForecastDto
+61.         {
+62.             Forecast = forecast
+63.         });
+64.     }
+65. 
+
+В.2 Адміністрування бізнес-логіки системи
+
+GitHub репозиторій: https://github.com/NureKhaninaDaryna/apz-pzpi-22-1-khanina-daryna/blob/main/Lab2/pzpi-22-1-khanina-daryna-lab2/DeniMetrics.WebAPI/Attributes/PermissionAuthorizeAttribute.cs
+
+1. ﻿using DineMetrics.Core.Enums;
+2. using DineMetrics.Core.Models;
+3. using DineMetrics.Core.Stores;
+4. using Microsoft.AspNetCore.Mvc;
+5. using Microsoft.AspNetCore.Mvc.Filters;
+6. 
+7. namespace DeniMetrics.WebAPI.Attributes;
+8. 
+9. [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class)]
+10. public class PermissionAuthorizeAttribute(ManagementName management, PermissionAccess requiredAccess)
+11.     : Attribute, IAsyncActionFilter
+12. {
+13.     public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
+14.     {
+15.         var user = (User?)context.HttpContext.Items["User"];
+16. 
+17.         if (user == null)
+18.         {
+19.             context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };
+20.             return;
+21.         }
+22. 
+23.         var hasPermission = RolePermissionsStore.AllPermissions.Any(p =>
+24.             p.Role == user.Role &&
+25.             p.Management == management &&
+26.             (
+27.                 p.Access == PermissionAccess.Full ||
+28.                 (p.Access == PermissionAccess.Read && requiredAccess == PermissionAccess.Read)
+29.             ));
+30. 
+31.         if (!hasPermission)
+32.         {
+33.             context.Result = new JsonResult(new { message = "You don't have proper permission to do this" }) { StatusCode = StatusCodes.Status401Unauthorized };
+34.             return;
+35.         }
+36. 
+37.         await next();
+38.     }
+39. }
+40. 
+
+
+В.3 Резервне копіювання користувацьких даних
+
+GitHub репозиторій: https://github.com/NureKhaninaDaryna/apz-pzpi-22-1-khanina-daryna/blob/main/Lab2/pzpi-22-1-khanina-daryna-lab2/DineMetrics.BLL/Services/SettingsBackupService.cs 
+
+1. ﻿using DineMetrics.BLL.Services.Interfaces;
+2. using DineMetrics.Core.Models;
+3. using DineMetrics.Core.Shared;
+4. using DineMetrics.DAL;
+5. using DineMetrics.DAL.Repositories;
+6. 
+7. namespace DineMetrics.BLL.Services;
+8. 
+9. public class SettingsBackupService(IRepository<EaterySettingsBackup> repository, IRepository<Eatery> eateryRepository) : ISettingsBackupService
+10. {
+11.     public async Task<ServiceResult> BackupEaterySettings(int eateryId)
+12.     {
+13.         var eatery = await eateryRepository.GetByIdAsync(eateryId);
+14.         if (eatery == null) return ServiceResult.Failure(new Error("Eatery not found"));
+15. 
+16.         var backup = new EaterySettingsBackup
+17.         {
+18.             EateryId = eateryId,
+19.             OperatingHours = eatery.OperatingHours,
+20.             MaximumCapacity = eatery.MaximumCapacity,
+21.             TemperatureThreshold = eatery.TemperatureThreshold
+22.         };
+23. 
+24.         await repository.CreateAsync(backup);
+25.         
+26.         return ServiceResult.Success;
+27.     }
+28. 
+29.     public async Task<ServiceResult> RestoreEaterySettings(int eateryId, string backupName)
+30.     {
+31.         var backup = (await repository
+32.             .GetByPredicateAsync(b => b.EateryId == eateryId && b.BackupName == backupName))
+33.             .FirstOrDefault();
+34. 
+35.         if (backup == null) return ServiceResult.Failure(new Error("Backup not found"));
+36. 
+37.         var eatery = await eateryRepository.GetByIdAsync(eateryId);
+38.         if (eatery == null) return ServiceResult.Failure(new Error("Eatery not found"));
+39. 
+40.         eatery.OperatingHours = backup.OperatingHours;
+41.         eatery.MaximumCapacity = backup.MaximumCapacity;
+42.         eatery.TemperatureThreshold = backup.TemperatureThreshold;
+43. 
+44.         await eateryRepository.UpdateAsync(eatery);
+45.         
+46.         return ServiceResult.Success;
+47.     }
+48. 
+49.     public async Task<List<EaterySettingsBackup>> GetBackups(int eateryId)
+50.     {
+51.         var backups = await repository.GetByPredicateAsync(b => b.EateryId == eateryId);
+52. 
+53.         return backups.OrderByDescending(b => b.BackupTime).ToList();
+54.     }
+55. }
+56. 
