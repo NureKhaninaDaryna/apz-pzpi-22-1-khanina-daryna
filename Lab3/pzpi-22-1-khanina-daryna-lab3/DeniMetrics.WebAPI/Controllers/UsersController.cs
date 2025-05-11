@@ -66,9 +66,9 @@ public class UsersController : BaseController
     {
         var currentUser = (User?)HttpContext.Items["User"];
         
-        if (currentUser?.Id == dto.Id) return BadRequest("You cannot change yourself role");
+        if (currentUser?.Id == dto.UserId) return BadRequest("You cannot change yourself role");
         
-        var user = await _userService.ChangeRole(dto.Id, dto.Role);
+        var user = await _userService.ChangeRole(dto.UserId, dto.Role);
         
         if (user == null) return BadRequest("User not found");
         
@@ -84,6 +84,6 @@ public class ChangePasswordRequest
 
 public class UpdateRoleDto
 {
-    public int Id { get; set; }
+    public int UserId { get; set; }
     public UserRole Role { get; set; }
 }
