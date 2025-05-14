@@ -36,6 +36,7 @@ public class TemperatureMetricsController : BaseController
             DeviceId = metric.Device.Id,
             Value = metric.Value,
             Time = metric.Time,
+            DeviceModel = metric.Device.Model
         }).ToList();
         
         return temperatureMetricDtos;

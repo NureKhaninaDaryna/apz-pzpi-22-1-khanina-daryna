@@ -5,12 +5,17 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:DineMetrics.Mobile"
     xmlns:pages="clr-namespace:DineMetrics.Mobile.Pages"
-    Shell.FlyoutBehavior="Disabled"
+    Shell.FlyoutBehavior="Flyout"
     Title="DineMetrics.Mobile">
 
     <ShellContent
         Title="Login"
         ContentTemplate="{DataTemplate pages:LoginPage}"
         Route="login" />
+    
+    <ShellContent
+        Title="Metrics"
+        ContentTemplate="{DataTemplate pages:MetricsPage}"
+        Route="metrics" />
 
 </Shell>

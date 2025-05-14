@@ -6,6 +6,10 @@
 
         public DateTime Time { get; set; }
 
+        public int DeviceId { get; set; }
+        
+        public int ReportId { get; set; }
+
         public virtual Device Device { get; set; } = null!;
 
         public virtual Report Report { get; set; } = null!;

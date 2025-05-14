@@ -13,14 +13,15 @@ public static class MauiProgram
 	{
 		var builder = MauiApp.CreateBuilder();
 		
-        builder.Services.AddHttpClient<IAuthenticator, Authenticator>(client =>
-        {
-            client.BaseAddress = new Uri("http://10.0.2.2:5048/");
-        });
+		builder.Services.AddHttpClient();
         builder.Services.AddTransient<LoginViewModel>();
+        builder.Services.AddTransient<MetricsViewModel>();
         builder.Services.AddTransient<LoginPage>();
+        builder.Services.AddTransient<MetricsPage>();
+        builder.Services.AddSingleton<IAuthenticator, Authenticator>();
+
         builder
-			.UseMauiApp<App>()
+            .UseMauiApp<App>()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

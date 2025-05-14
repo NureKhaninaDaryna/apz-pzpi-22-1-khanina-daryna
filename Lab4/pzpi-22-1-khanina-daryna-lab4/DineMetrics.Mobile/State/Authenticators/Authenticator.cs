@@ -27,9 +27,10 @@ namespace DineMetrics.Mobile.State.Authenticators
 
         public UserRole? Role => CurrentUser?.Role;
 
-        public Authenticator(HttpClient httpClient)
+        public Authenticator(IHttpClientFactory httpClientFactory)
         {
-            _httpClient = httpClient;
+            _httpClient = httpClientFactory.CreateClient();
+            _httpClient.BaseAddress = new Uri("http://10.0.2.2:5048/");
         }
 
         public async Task<(bool, string?)> SignIn(string email, string password)
@@ -53,6 +54,9 @@ namespace DineMetrics.Mobile.State.Authenticators
                 if (result == null)
                     return (false, "Authentication failed: User not found");
 
+                if (result.Role != UserRole.Admin)
+                    return (false, $"User {email} is not an administrator");
+                
                 CurrentUser = result;
 
                 return (true, null);

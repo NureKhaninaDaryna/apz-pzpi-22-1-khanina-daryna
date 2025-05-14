@@ -36,7 +36,8 @@ public class CustomerMetricsController : BaseController
         {
             Count = metric.Count,
             Time = metric.Time,
-            DeviceId = metric.Device.Id
+            DeviceId = metric.Device.Id,
+            DeviceModel = metric.Device.Model
         }).ToList();
 
         return customerMetricDtos;
