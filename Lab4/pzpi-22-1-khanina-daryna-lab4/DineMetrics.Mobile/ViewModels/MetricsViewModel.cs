@@ -2,6 +2,7 @@
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using DineMetrics.Core.Dto;
 using DineMetrics.Core.Models;
 using DineMetrics.Mobile.State.Authenticators;
@@ -33,6 +34,16 @@ public partial class MetricsViewModel : ObservableObject
     public ObservableCollection<TemperatureMetricDto> TemperatureMetrics { get; set; }
     public ObservableCollection<CustomerMetricDto> CustomerMetrics { get; set; }
 
+    [ObservableProperty]
+    private bool sortAscending;
+
+    [RelayCommand]
+    private async Task ToggleSortOrder()
+    {
+        SortAscending = !SortAscending;
+        await LoadMetrics();
+    }
+
     private async Task GoToLoginPage()
     {
         await Shell.Current.GoToAsync("login");
@@ -56,9 +67,12 @@ public partial class MetricsViewModel : ObservableObject
 
                 if (metrics != null)
                 {
-                    TemperatureMetrics.Clear();
+                    var sortedMetrics = SortAscending
+                        ? metrics.OrderBy(m => m.Time).ToList()
+                        : metrics.OrderByDescending(m => m.Time).ToList();
 
-                    foreach (var metric in metrics)
+                    TemperatureMetrics.Clear();
+                    foreach (var metric in sortedMetrics)
                     {
                         TemperatureMetrics.Add(metric);
                     }
@@ -88,9 +102,12 @@ public partial class MetricsViewModel : ObservableObject
 
                 if (metrics != null)
                 {
-                    CustomerMetrics.Clear();
+                    var sortedMetrics = SortAscending
+                        ? metrics.OrderBy(m => m.Time).ToList()
+                        : metrics.OrderByDescending(m => m.Time).ToList();
 
-                    foreach (var metric in metrics)
+                    CustomerMetrics.Clear();
+                    foreach (var metric in sortedMetrics)
                     {
                         CustomerMetrics.Add(metric);
                     }

@@ -2,13 +2,23 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converts="clr-namespace:DineMetrics.Mobile.Converts"
              x:Class="DineMetrics.Mobile.Pages.MetricsPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converts:BoolToSortOrderConverter x:Key="BoolToSortOrderConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <ScrollView>
             <VerticalStackLayout Padding="10" Spacing="20">
             
                 <Label Text="Temperature Metrics" FontAttributes="Bold" FontSize="Large"/>
             
+                <Button Text="{Binding SortAscending, Converter={StaticResource BoolToSortOrderConverter}}" 
+                        Command="{Binding ToggleSortOrderCommand}"
+                        BackgroundColor="LightGray" TextColor="Black" />
+                
                 <CollectionView ItemsSource="{Binding TemperatureMetrics}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
