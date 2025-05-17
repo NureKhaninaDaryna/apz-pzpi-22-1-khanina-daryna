@@ -1,1 +1,445 @@
+Міністерство освіти і науки України
 
+Харківський національний університет радіоелектроніки
+
+
+
+
+
+
+
+Кафедра ПІ
+
+
+
+
+
+
+Звіт з лабораторної роботи №4
+З дисципліни «Архітектура програмного забезпечення»
+
+
+
+
+
+Виконав:
+ст. гр. ПЗПІ-22-1	Ханіна Д.Д.
+
+Перевірив:
+ст. викл.	Сокорчук І. П.
+
+
+
+
+
+
+
+
+Харків 2025 р.
+1 ІСТОРІЯ ЗМІН
+
+
+№
+Дата
+Версія звіту 
+Опис змін
+1
+15.05.2025
+0.1
+Створення звіту
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2 ЗАВДАННЯ
+
+На цій лабораторній роботі потрібно розробити мобільний програмний застосунок для будь-якої поширеної на сьогодні мобільної платформи. Мобільний застосунок повинен бути частиною системи і повинен взаємодіяти з нею.
+Звіт повинен містити: 
+- UML діаграму прецедентів (Use Case Diagram); 
+- UML діаграму компонент (Component Diagram). 
+- ER-модель даних (Entity–Relationship Model) мобільної платформи; 
+- UML діаграму взаємодії (Interaction Overview Diagram);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3 ОПИС ВИКОНАНОЇ РОБОТИ
+
+В рамках виконаної роботи було розроблено мобільний додаток на платформі .NET MAUI, який призначений виключно для користувачів із правами адміністратора. Основні функціональні можливості додатку забезпечують швидкий доступ до ключових показників ефективності закладу в режимі реального часу та дозволяють здійснювати управління налаштуваннями системи безпосередньо з мобільного пристрою.
+Інженерні підходи та архітектурні рішення:
+Вибір .NET MAUI зумовлений необхідністю створення кросплатформеного застосунку для iOS та Android з єдиною кодовою базою.
+
+
+Архітектура додатку побудована за принципами MVVM (Model-View-ViewModel) для чіткої роздільності логіки бізнес-процесів і відображення інтерфейсу.
+
+
+Для роботи з API використано HttpClient із централізованою конфігурацією базової адреси та передачі токену авторизації в заголовках запитів.
+
+
+Аутентифікація реалізована через JWT Token з підтримкою лише ролі Admin.
+
+
+Для управління доступом до функціоналу використано рольову систему RBAC.
+
+
+Реалізовані функціональні можливості:
+Авторизація користувачів-адміністраторів через серверний API.
+
+
+Відображення основних метрик закладу в реальному часі (дані з IoT-пристроїв):
+
+
+Температурні метрики.
+
+
+Показники присутності клієнтів.
+
+
+Редагування налаштувань закладів (CRUD-операції через API).
+
+
+Автоматичне оновлення даних у ViewModel для забезпечення актуальності показників.
+
+
+Захист роутів та навігації у додатку (недопуск неавторизованих користувачів).
+
+
+Зручний інтерфейс з використанням CollectionView для відображення списків метрик.
+
+
+Використані технології та інструменти:
+.NET 8 та .NET MAUI.
+
+
+C#, XAML.
+
+
+CommunityToolkit.Mvvm для спрощення патерну MVVM.
+
+
+REST API взаємодія через HttpClient.
+
+
+JWT Token для аутентифікації та авторизації.
+
+
+Dependency Injection для керування життєвим циклом сервісів.
+
+
+Висновки:
+У результаті виконаної роботи було створено кросплатформений мобільний додаток, який відповідає усім заданим вимогам. Додаток забезпечує:
+Швидкий доступ до ключових показників закладу в реальному часі.
+
+
+Зручне управління налаштуваннями системи з мобільного пристрою.
+
+
+Гнучку систему аутентифікації з обмеженням доступу лише для адміністраторів. Отримано практичні навички роботи з .NET MAUI, реалізації взаємодії з REST API, побудови архітектури MVVM та захисту доступу через JWT.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4 ВИСНОВКИ
+У результаті виконаної роботи було створено кросплатформений мобільний додаток, який відповідає усім заданим вимогам. Додаток забезпечує:
+Швидкий доступ до ключових показників закладу в реальному часі.
+
+
+Зручне управління налаштуваннями системи з мобільного пристрою.
+
+
+Гнучку систему аутентифікації з обмеженням доступу лише для адміністраторів. Отримано практичні навички роботи з .NET MAUI, реалізації взаємодії з REST API, побудови архітектури MVVM та захисту доступу через JWT.
+
+
+
+
+
+
+
+
+
+
+
+
+
+ДОДАТОК А
+Відеозапис
+Відеозапис презентації результатів лабораторної роботи: https://youtu.be/OZvr2RRNGEM
+
+Хронологічний опис відеозапису:
+
+00:00 - Вступ 
+01:15 - Авторизація користувачів-адміністраторів 
+01:45 - Відображення основних метрик
+02:25 - Редагування налаштувань закладів
+04:30 - Подяка за перегляд
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ДОДАТОК Б
+
+
+Рисунок Б.1 — UML-діаграма прецедентів
+
+
+
+Рисунок Б.2 — UML діаграму компонент
+
+
+
+Рисунок Б.3 — ER-модель даних
+
+
+
+Рисунок Б.4 — UML діаграму взаємодії
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ДОДАТОК В
+
+Програмний код
+
+В.1 Сторінка аутентифікації
+
+GitHub репозиторій: https://github.com/NureKhaninaDaryna/apz-pzpi-22-1-khanina-daryna/blob/main/Lab4/pzpi-22-1-khanina-daryna-lab4/DineMetrics.Mobile/Pages/LoginPage.xaml
+
+1. ﻿<?xml version="1.0" encoding="utf-8"?>
+2. 
+3. <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+4.              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+5.              x:Class="DineMetrics.Mobile.Pages.LoginPage">
+6.     <ContentPage.Content>
+7.         <ScrollView>
+8.             <VerticalStackLayout Padding="20" Spacing="15">
+9.                 
+10.                 <Label Text="Login" FontSize="32" HorizontalOptions="Center"/>
+11. 
+12.                 <Entry Placeholder="Email"
+13.                        Text="{Binding Username}" />
+14. 
+15.                 <Entry Placeholder="Password"
+16.                        IsPassword="True"
+17.                        Text="{Binding Password}" />
+18. 
+19.                 <Label Text="{Binding FeedbackMessage}" TextColor="Red" />
+20. 
+21.                 <Button Text="Login"
+22.                         Command="{Binding LoginCommand}" />
+23.                 
+24.             </VerticalStackLayout>
+25.         </ScrollView>
+26.     </ContentPage.Content>
+27. </ContentPage>
+
+
+
+
+
+
+
+
+В.2 Сторінка метрик
+
+GitHub репозиторій: https://github.com/NureKhaninaDaryna/apz-pzpi-22-1-khanina-daryna/blob/main/Lab4/pzpi-22-1-khanina-daryna-lab4/DineMetrics.Mobile/Pages/MetricsPage.xaml
+
+1. ﻿<?xml version="1.0" encoding="utf-8"?>
+2. 
+3. <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+4.              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+5.              x:Class="DineMetrics.Mobile.Pages.MetricsPage">
+6.     <ContentPage.Content>
+7.         <ScrollView>
+8.             <VerticalStackLayout Padding="10" Spacing="20">
+9.             
+10.                 <Label Text="Temperature Metrics" FontAttributes="Bold" FontSize="Large"/>
+11.             
+12.                 <CollectionView ItemsSource="{Binding TemperatureMetrics}">
+13.                     <CollectionView.ItemTemplate>
+14.                         <DataTemplate>
+15.                             <Frame BorderColor="Gray" CornerRadius="5" Padding="10" Margin="0,5">
+16.                                 <VerticalStackLayout>
+17.                                     <Label Text="{Binding DeviceModel}" FontAttributes="Bold"/>
+18.                                     
+19.                                     <Label>
+20.                                         <Label.FormattedText>
+21.                                             <FormattedString>
+22.                                                 <Span Text="Value: "/>
+23.                                                 <Span Text="{Binding Value}" />
+24.                                             </FormattedString>
+25.                                         </Label.FormattedText>
+26.                                     </Label>
+27.                                     
+28.                                     <Label Text="{Binding Time, StringFormat='{0:dd.MM.yyyy HH:mm}'}" FontSize="Small" TextColor="Gray"/>
+29.                                 </VerticalStackLayout>
+30.                             </Frame>
+31.                         </DataTemplate>
+32.                     </CollectionView.ItemTemplate>
+33.                 </CollectionView>
+34. 
+35.                 <Label Text="Customer Metrics" FontAttributes="Bold" FontSize="Large" Margin="0,20,0,0"/>
+36.             
+37.                 <CollectionView ItemsSource="{Binding CustomerMetrics}">
+38.                     <CollectionView.ItemTemplate>
+39.                         <DataTemplate>
+40.                             <Frame BorderColor="Gray" CornerRadius="5" Padding="10" Margin="0,5">
+41.                                 <VerticalStackLayout>
+42.                                     <Label Text="{Binding DeviceModel}" FontAttributes="Bold"/>
+43.                                     
+44.                                     <Label>
+45.                                         <Label.FormattedText>
+46.                                             <FormattedString>
+47.                                                 <Span Text="Count: "/>
+48.                                                 <Span Text="{Binding Count}" />
+49.                                             </FormattedString>
+50.                                         </Label.FormattedText>
+51.                                     </Label>
+52.                                     
+53.                                     <Label Text="{Binding Time, StringFormat='{0:dd.MM.yyyy HH:mm}'}" FontSize="Small" TextColor="Gray"/>
+54.                                 </VerticalStackLayout>
+55.                             </Frame>
+56.                         </DataTemplate>
+57.                     </CollectionView.ItemTemplate>
+58.                 </CollectionView>
+59. 
+60.             </VerticalStackLayout>
+61.         </ScrollView>
+62.     </ContentPage.Content>
+63. </ContentPage>
+
+
+
+
+
+
+
+
+
+
+
+
+В.3 Сторінка зміни налаштувань закладу
+
+GitHub репозиторій: https://github.com/NureKhaninaDaryna/apz-pzpi-22-1-khanina-daryna/blob/main/Lab4/pzpi-22-1-khanina-daryna-lab4/DineMetrics.Mobile/Pages/SettingsPage.xaml
+
+1. ﻿<?xml version="1.0" encoding="utf-8"?>
+2. 
+3. <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+4.              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+5.              x:Class="DineMetrics.Mobile.Pages.SettingsPage">
+6.     <ContentPage.Content>
+7.         <ScrollView>
+8.             <VerticalStackLayout Padding="20" Spacing="15">
+9.                 <Label Text="Select Eatery" FontAttributes="Bold"/>
+10.                 <Picker ItemsSource="{Binding Eateries}"
+11.                         ItemDisplayBinding="{Binding Name}"
+12.                         SelectedItem="{Binding SelectedEatery}" />
+13. 
+14. 
+15.                 <Label Text="Operating Hours (From - To)" FontAttributes="Bold"/>
+16.                 <HorizontalStackLayout>
+17.                     <Entry Placeholder="From" Text="{Binding FromTime}" WidthRequest="100"/>
+18.                     <Entry Placeholder="To" Text="{Binding ToTime}" WidthRequest="100"/>
+19.                 </HorizontalStackLayout>
+20. 
+21.                 <Label Text="Maximum Capacity" FontAttributes="Bold"/>
+22.                 <Entry Keyboard="Numeric" Text="{Binding MaximumCapacity}" />
+23. 
+24.                 <Label Text="Min. Temperature Threshold" FontAttributes="Bold"/>
+25.                 <Entry Keyboard="Numeric" Text="{Binding TemperatureThreshold}" />
+26. 
+27.                 <Button Text="Save Settings"
+28.                         Command="{Binding SaveCommand}" />
+29. 
+30.                 <Button Text="Load Eateries"
+31.                         Command="{Binding LoadCommand}" />
+32.             </VerticalStackLayout>
+33.         </ScrollView>
+34.     </ContentPage.Content>

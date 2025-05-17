@@ -15,6 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\pzpi-22-1-khanina-daryna-lab3.txt = ..\pzpi-22-1-khanina-daryna-lab3.txt
 		..\..\Task3\testData.txt = ..\..\Task3\testData.txt
 		..\..\Task5\arkpz-pzpi-22-1-khanina-daryna-task5\testDataLab5.txt = ..\..\Task5\arkpz-pzpi-22-1-khanina-daryna-task5\testDataLab5.txt
+		..\pzpi-22-1-khanina-daryna-lab4.txt = ..\pzpi-22-1-khanina-daryna-lab4.txt
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DineMetrics.DAL", "DineMetrics.DAL\DineMetrics.DAL.csproj", "{CB0A2B80-F878-4B2D-89FD-713E50835D24}"
