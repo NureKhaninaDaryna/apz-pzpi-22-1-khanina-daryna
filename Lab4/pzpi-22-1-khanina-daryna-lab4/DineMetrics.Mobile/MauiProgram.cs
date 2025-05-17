@@ -16,8 +16,10 @@ public static class MauiProgram
 		builder.Services.AddHttpClient();
         builder.Services.AddTransient<LoginViewModel>();
         builder.Services.AddTransient<MetricsViewModel>();
+        builder.Services.AddTransient<SettingsViewModel>();
         builder.Services.AddTransient<LoginPage>();
         builder.Services.AddTransient<MetricsPage>();
+        builder.Services.AddTransient<SettingsPage>();
         builder.Services.AddSingleton<IAuthenticator, Authenticator>();
 
         builder

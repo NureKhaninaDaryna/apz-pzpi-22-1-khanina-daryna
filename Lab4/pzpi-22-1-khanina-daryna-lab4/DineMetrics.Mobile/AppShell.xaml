@@ -17,5 +17,10 @@
         Title="Metrics"
         ContentTemplate="{DataTemplate pages:MetricsPage}"
         Route="metrics" />
+    
+    <ShellContent
+        Title="Settings"
+        ContentTemplate="{DataTemplate pages:SettingsPage}"
+        Route="settings" />
 
 </Shell>

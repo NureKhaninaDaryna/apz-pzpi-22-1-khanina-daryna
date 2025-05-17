@@ -1,4 +1,5 @@
 ﻿using DineMetrics.Core.Enums;
+using System.Text.Json.Serialization;
 
 namespace DineMetrics.Core.Dto;
 
@@ -12,7 +13,8 @@ public class EateryDto
     public string Name { get; set; }
 
     public string Address { get; set; }
-    
+
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public EateryType Type { get; set; }
         
     public DateOnly OpeningDay { get; set; }

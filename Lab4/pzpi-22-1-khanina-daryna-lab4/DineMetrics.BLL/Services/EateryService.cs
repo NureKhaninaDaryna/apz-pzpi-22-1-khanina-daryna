@@ -22,7 +22,7 @@ public class EateryService : IEateryService
         if (eatery == null)
             return ServiceResult<EateryDto>.NotFound();
 
-        eatery.OperatingHours = from + to;
+        eatery.OperatingHours = from + "-" + to;
 
         try
         {
