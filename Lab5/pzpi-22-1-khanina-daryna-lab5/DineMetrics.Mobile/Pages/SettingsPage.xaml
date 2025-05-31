@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DineMetrics.Mobile.Pages.SettingsPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="15">
+                <Label Text="Select Eatery" FontAttributes="Bold"/>
+                <Picker ItemsSource="{Binding Eateries}"
+                        ItemDisplayBinding="{Binding Name}"
+                        SelectedItem="{Binding SelectedEatery}" />
+
+
+                <Label Text="Operating Hours (From - To)" FontAttributes="Bold"/>
+                <HorizontalStackLayout>
+                    <Entry Placeholder="From" Text="{Binding FromTime}" WidthRequest="100"/>
+                    <Entry Placeholder="To" Text="{Binding ToTime}" WidthRequest="100"/>
+                </HorizontalStackLayout>
+
+                <Label Text="Maximum Capacity" FontAttributes="Bold"/>
+                <Entry Keyboard="Numeric" Text="{Binding MaximumCapacity}" />
+
+                <Label Text="Min. Temperature Threshold" FontAttributes="Bold"/>
+                <Entry Keyboard="Numeric" Text="{Binding TemperatureThreshold}" />
+
+                <Button Text="Save Settings"
+                        Command="{Binding SaveCommand}" />
+
+                <Button Text="Load Eateries"
+                        Command="{Binding LoadCommand}" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

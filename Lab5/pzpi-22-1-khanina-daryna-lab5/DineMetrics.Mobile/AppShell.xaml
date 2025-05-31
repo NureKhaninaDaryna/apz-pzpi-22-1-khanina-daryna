@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="DineMetrics.Mobile.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:DineMetrics.Mobile"
+    xmlns:pages="clr-namespace:DineMetrics.Mobile.Pages"
+    Shell.FlyoutBehavior="Flyout"
+    Title="DineMetrics.Mobile">
+
+    <ShellContent
+        Title="Login"
+        ContentTemplate="{DataTemplate pages:LoginPage}"
+        Route="login" />
+    
+    <ShellContent
+        Title="Metrics"
+        ContentTemplate="{DataTemplate pages:MetricsPage}"
+        Route="metrics" />
+    
+    <ShellContent
+        Title="Settings"
+        ContentTemplate="{DataTemplate pages:SettingsPage}"
+        Route="settings" />
+
+</Shell>
