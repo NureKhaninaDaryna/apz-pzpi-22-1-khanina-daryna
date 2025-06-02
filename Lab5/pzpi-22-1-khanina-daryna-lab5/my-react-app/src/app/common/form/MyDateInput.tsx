@@ -1,23 +1,44 @@
 ﻿import { useField } from "formik";
 import { Form, Label } from "semantic-ui-react";
-import DatePicker, { DatePickerProps } from "react-datepicker";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
-export default function MyDateInput(props: Partial<DatePickerProps>) {
-   const [field, meta, helpers] = useField(props.name!);
+interface MyDateInputProps {
+   name: string;
+   placeholder?: string;
+   dateFormat?: string;
+   showYearDropdown?: boolean;
+   showMonthDropdown?: boolean;
+   isClearable?: boolean;
+}
+
+export default function MyDateInput({
+                                       name,
+                                       placeholder,
+                                       dateFormat = "yyyy-MM-dd",
+                                       showYearDropdown = true,
+                                       showMonthDropdown = true,
+                                       isClearable = false,
+                                    }: MyDateInputProps) {
+   const [field, meta, helpers] = useField(name);
 
    return (
       <Form.Field error={meta.touched && !!meta.error}>
          <DatePicker
-            {...props}
             selected={field.value ? new Date(field.value) : null}
-            onChange={(date) =>
+            onChange={(date: Date | null) =>
                helpers.setValue(date ? date.toISOString().split("T")[0] : "")
             }
             onBlur={() => helpers.setTouched(true)}
+            placeholderText={placeholder}
+            dateFormat={dateFormat}
+            showYearDropdown={showYearDropdown}
+            showMonthDropdown={showMonthDropdown}
+            isClearable={isClearable}
          />
-         {meta.touched && meta.error ? (
+         {meta.touched && meta.error && (
             <Label basic color="red" content={meta.error} />
-         ) : null}
+         )}
       </Form.Field>
    );
 }

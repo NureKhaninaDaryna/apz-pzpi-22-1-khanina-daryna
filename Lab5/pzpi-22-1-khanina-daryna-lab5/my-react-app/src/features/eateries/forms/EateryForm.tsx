@@ -111,7 +111,7 @@ export default observer(function EateryForm() {
                         options={eateryTypeOptions}
                      />
                      <MyDateInput
-                        placeholderText='Date'
+                        placeholder='Date'
                         name='openingDay'
                         dateFormat="yyyy-MM-dd"
                      />

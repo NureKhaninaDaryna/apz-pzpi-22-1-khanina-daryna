@@ -4,6 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,4 +26,21 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.9.0" />
   </ItemGroup>
 
+<!--  <Target Name="CopyReactBuild" AfterTargets="Build">-->
+<!--    <Exec Command="npm install" WorkingDirectory="$(SolutionDir)my-react-app" />-->
+<!--    <Exec Command="npm run build" WorkingDirectory="$(SolutionDir)my-react-app" />-->
+<!--    <RemoveDir Directories="$(ProjectDir)wwwroot" />-->
+<!--    <MakeDir Directories="$(ProjectDir)wwwroot" />-->
+<!--    <Copy SourceFiles="@(MyReactFiles)" DestinationFolder="$(ProjectDir)wwwroot\%(RecursiveDir)" />-->
+<!--  </Target>-->
+
+<!--  <ItemGroup>-->
+<!--    <MyReactFiles Include="$(SolutionDir)my-react-app\build\**\*" />-->
+<!--  </ItemGroup>-->
+
+<!--  <ItemGroup>-->
+<!--    <Content Include="..\.dockerignore">-->
+<!--      <Link>.dockerignore</Link>-->
+<!--    </Content>-->
+<!--  </ItemGroup>-->
 </Project>

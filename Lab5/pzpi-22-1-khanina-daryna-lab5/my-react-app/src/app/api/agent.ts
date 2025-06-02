@@ -3,7 +3,7 @@ import axios, {AxiosRequestConfig} from "axios";
 import type { AxiosError, AxiosResponse } from "axios";
 import {toast} from "react-toastify";
 import {router} from "../router/Routes.tsx";
-import {User, UserDto, UserFromValues, UserRole, UserWithId} from "../models/user.ts";
+import {User, UserDto, UserFromValues, UserWithId} from "../models/user.ts";
 import {Eatery} from "../models/eatery.ts";
 import {DashboardDataDto, TrendAnalysisDto} from "../models/analytics.ts";
 
@@ -13,7 +13,7 @@ const sleep = (delay: number) => {
    });
 };
 
-axios.defaults.baseURL = "http://localhost:5048";
+axios.defaults.baseURL = "http://localhost:8080";
 
 axios.interceptors.request.use(config => {
    const token = store.commonStore.token;

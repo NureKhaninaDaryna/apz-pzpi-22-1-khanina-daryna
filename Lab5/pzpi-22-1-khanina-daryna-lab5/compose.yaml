@@ -1,0 +1,45 @@
+﻿version: '3.8'
+
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: denimetrics-mssql
+    environment:
+      SA_PASSWORD: "YourStrong(!)Password"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssql_data:/var/opt/mssql
+    restart: unless-stopped
+    
+  denimetrics.webapi:
+    image: denimetrics.webapi
+    build:
+      context: .
+      dockerfile: DeniMetrics.WebAPI/Dockerfile
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    depends_on:
+      - mssql
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    restart: unless-stopped
+
+  client:
+    image: denimetrics.client
+    build:
+      context: ./my-react-app
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      VITE_API_URL: "http://localhost:8080"  # или имя сервиса, если внутри docker: http://denimetrics.webapi:8080
+    depends_on:
+      - denimetrics.webapi
+    restart: unless-stopped
+
+volumes:
+  mssql_data:
+

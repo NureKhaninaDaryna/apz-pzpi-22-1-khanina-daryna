@@ -3,7 +3,9 @@ using DeniMetrics.WebAPI.Configurations;
 using DeniMetrics.WebAPI.Middlewares;
 using DeniMetrics.WebAPI.Validators;
 using DineMetrics.BLL.Hubs;
+using DineMetrics.DAL;
 using FluentValidation.AspNetCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -103,6 +105,20 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<AppDbContext>();
+        context.Database.Migrate();
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Migration failed: {ex.Message}");
+    }
+}
+
 app.UseHttpsRedirection();
 
 app.UseCors("AllowReactApp");
@@ -111,6 +127,11 @@ app.UseAuthorization();
 
 app.UseMiddleware<JwtMiddleware>();
 app.UseMiddleware<ExceptionsHandlingMiddleware>();
+
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
+app.MapFallbackToFile("index.html");
 
 app.MapControllers();
 
