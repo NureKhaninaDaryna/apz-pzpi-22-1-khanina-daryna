@@ -35,7 +35,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      VITE_API_URL: "http://localhost:8080"  # или имя сервиса, если внутри docker: http://denimetrics.webapi:8080
+      VITE_API_URL: "http://localhost:8080" 
     depends_on:
       - denimetrics.webapi
     restart: unless-stopped
