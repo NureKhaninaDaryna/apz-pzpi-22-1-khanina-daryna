@@ -1,1 +1,508 @@
 
+Міністерство освіти і науки України
+
+Харківський національний університет радіоелектроніки
+
+
+
+
+
+
+
+Кафедра ПІ
+
+
+
+
+
+
+Звіт з лабораторної роботи №5
+З дисципліни «Архітектура програмного забезпечення»
+
+
+
+
+
+Виконав:
+ст. гр. ПЗПІ-22-1	Ханіна Д.Д.
+
+Перевірив:
+ст. викл.	Сокорчук І. П.
+
+
+
+
+
+
+
+
+Харків 2025 р.
+1 ІСТОРІЯ ЗМІН
+
+
+№
+Дата
+Версія звіту 
+Опис змін
+1
+01.06.2025
+0.1
+Створення звіту
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2 ЗАВДАННЯ
+
+На цій лабораторній роботі потрібно зробити розгортання системи.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3 ОПИС ВИКОНАНОЇ РОБОТИ
+
+У рамках лабораторної роботи було розроблено вебзастосунок, що складається з серверної частини (ASP.NET Core WebAPI), клієнтської частини (React + Vite), а також мобільного застосунку на .NET MAUI. Усі сервіси були інтегровані та налаштовані для спільної роботи за допомогою Docker.
+Основні кроки виконаної роботи:
+Розгортання серверної частини (.NET WebAPI)
+
+
+Налаштовано Dockerfile для побудови та запуску ASP.NET Core WebAPI.
+
+
+У коді Program.cs реалізовано автоматичне застосування міграцій при запуску.
+
+
+Додано підключення до SQL Server через Docker.
+
+
+Забезпечено CORS-доступ до API для клієнтської частини.
+
+
+Розгортання бази даних (MS SQL Server у Docker)
+
+
+Налаштовано сервіс mssql у docker-compose.yml з вказанням змінних середовища для підключення.
+
+
+Підключення до бази даних реалізовано через сервісне ім’я mssql (а не localhost) для міжконтейнерної взаємодії.
+
+
+Розгортання клієнтської частини (React + Vite)
+
+
+Створено окремий Dockerfile для React-застосунку з використанням serve для продакшн-білду.
+
+
+У змінних середовища передано VITE_API_URL для коректного підключення до WebAPI.
+
+
+Реалізовано зв’язок між клієнтською та серверною частиною через HTTP.
+
+
+Інтеграція всіх частин у docker-compose
+
+
+Налаштовано docker-compose.yml, який описує запуск WebAPI, клієнта і бази даних.
+
+
+Встановлено залежності між сервісами (depends_on), порти, змінні середовища, а також збереження даних у томах.
+
+
+Розробка мобільного застосунку (.NET MAUI)
+
+
+Реалізовано запуск MAUI-застосунку з Visual Studio.
+
+
+Мобільний клієнт взаємодіє з WebAPI, що запущений у Docker.
+
+
+Вирішення проблем з мережею та запуском міграцій
+
+
+Виправлено помилку з підключенням до бази даних, змінивши localhost на mssql.
+
+
+Додано логіку повторного підключення та очікування запуску бази перед виконанням міграцій.
+
+
+Перевірено доступність порту 1433 та сервісу MSSQL з WebAPI-контейнера.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4 ВИСНОВКИ
+У ході виконання лабораторної роботи було досягнуто повної інтеграції клієнтської, серверної та мобільної частин застосунку з використанням сучасних технологій розгортання, таких як Docker та Docker Compose. Це дозволило:
+забезпечити швидке та стандартизоване розгортання всього проєкту в кілька команд;
+
+
+організувати ефективну взаємодію між сервісами (WebAPI, база даних, клієнт);
+
+
+автоматизувати застосування міграцій до бази даних при запуску;
+
+
+налаштувати зручне середовище для локальної розробки, тестування та демонстрації;
+
+
+реалізувати мобільний клієнт з можливістю взаємодії з backend-сервісом.
+
+
+Також у процесі було усунуто ряд технічних проблем, пов’язаних із мережею контейнерів та підключенням до SQL Server, що дозволило покращити надійність і стабільність запуску.
+Таким чином, дана робота стала практичним прикладом побудови повноцінного мультиплатформного застосунку з використанням сучасного стеку технологій і інфраструктури, орієнтованої на контейнери.
+
+ДОДАТОК А
+Відеозапис
+
+Відеозапис презентації результатів лабораторної роботи: https://youtu.be/5S_TgM2bN-c
+
+Хронологічний опис відеозапису:
+
+00:00 - Вступ 
+00:13 - Завантаження файлу через GitHub
+00:52 - Docker compose 
+03:17 - Перевірка API
+03:35 - Перевірка Client
+04:10 - Перевірка Mobile
+04:50 - Подяка за перегляд
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ДОДАТОК Б
+
+
+
+Рисунок Б.1 — ER-діаграма даних
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Рисунок Б.2 — Структура бази даних
+
+Рисунок Б.3 — UML-діаграма прецедентів
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ДОДАТОК В
+Програмний код
+
+В.1 Математична обробка прикладних даних
+
+GitHub репозиторій: https://github.com/NureKhaninaDaryna/apz-pzpi-22-1-khanina-daryna/blob/main/Lab2/pzpi-22-1-khanina-daryna-lab2/DineMetrics.BLL/Services/AnalyticsService.cs
+
+
+1.     public async Task<ServiceResult<PeakLoadRecommendationDto>> GetPeakLoadRecommendations(int eateryId, DateTime from, DateTime to)
+2.     {
+3.         var metrics = await customerMetricRepository.GetByPredicateAsync(m =>
+4.             m.Device.Eatery.Id == eateryId && m.Time >= from && m.Time <= to);
+5. 
+6.         var grouped = metrics
+7.             .GroupBy(m => m.Time.Hour)
+8.             .Select(g => new { Hour = g.Key, AverageVisitors = g.Average(m => m.Count) })
+9.             .OrderByDescending(x => x.AverageVisitors)
+10.             .ToList();
+11. 
+12.         var peakHours = grouped.Take(3).Select(x => x.Hour).ToList();
+13. 
+14.         return ServiceResult<PeakLoadRecommendationDto>.Success(new PeakLoadRecommendationDto
+15.         {
+16.             RecommendedStaffIncreaseHours = peakHours
+17.         });
+18.     }
+19. 
+20.     public async Task<ServiceResult<AnomalyDetectionDto>> DetectAnomalies(int eateryId, DateTime from, DateTime to)
+21.     {
+22.         var metrics = await temperatureMetricRepository.GetByPredicateAsync(m =>
+23.             m.Device.Eatery.Id == eateryId && m.Time >= from && m.Time <= to);
+24. 
+25.         var average = metrics.Average(m => m.Value);
+26.         var stdDev = Math.Sqrt(metrics.Average(m => Math.Pow(m.Value - average, 2)));
+27. 
+28.         var anomalies = metrics
+29.             .Where(m => Math.Abs(m.Value - average) > 2 * stdDev)
+30.             .ToList();
+31. 
+32.         return ServiceResult<AnomalyDetectionDto>.Success(new AnomalyDetectionDto
+33.         {
+34.             AnomalyTimestamps = anomalies.Select(a => a.Time).ToList(),
+35.             Threshold = average,
+36.             StandardDeviation = stdDev
+37.         });
+38.     }
+39. 
+40.     public async Task<ServiceResult<LoadForecastDto>> ForecastLoad(int eateryId, int daysAhead)
+41.     {
+42.         var metrics = await customerMetricRepository.GetByPredicateAsync(m => m.Device.Eatery.Id == eateryId);
+43.         var dailyGroups = metrics.GroupBy(m => m.Time.Date)
+44.             .Select(g => new { Date = g.Key, Count = g.Sum(m => m.Count) })
+45.             .OrderBy(g => g.Date)
+46.             .ToList();
+47. 
+48.         var averageLoad = dailyGroups.Average(x => x.Count);
+49. 
+50.         var forecast = new List<ForecastDay>();
+51.         for (var i = 1; i <= daysAhead; i++)
+52.         {
+53.             forecast.Add(new ForecastDay
+54.             {
+55.                 Date = DateTime.Today.AddDays(i),
+56.                 ExpectedVisitors = (int)(averageLoad + (i % 3 == 0 ? 20 : 0))
+57.             });
+58.         }
+59. 
+60.         return ServiceResult<LoadForecastDto>.Success(new LoadForecastDto
+61.         {
+62.             Forecast = forecast
+63.         })
+В.2 Адміністрування бізнес-логіки системи
+
+GitHub репозиторій: https://github.com/NureKhaninaDaryna/apz-pzpi-22-1-khanina-daryna/blob/main/Lab2/pzpi-22-1-khanina-daryna-lab2/DeniMetrics.WebAPI/Attributes/PermissionAuthorizeAttribute.cs
+
+1. ﻿using DineMetrics.Core.Enums;
+2. using DineMetrics.Core.Models;
+3. using DineMetrics.Core.Stores;
+4. using Microsoft.AspNetCore.Mvc;
+5. using Microsoft.AspNetCore.Mvc.Filters;
+6. 
+7. namespace DeniMetrics.WebAPI.Attributes;
+8. 
+9. [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class)]
+10. public class PermissionAuthorizeAttribute(ManagementName management, PermissionAccess requiredAccess)
+11.     : Attribute, IAsyncActionFilter
+12. {
+13.     public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
+14.     {
+15.         var user = (User?)context.HttpContext.Items["User"];
+16. 
+17.         if (user == null)
+18.         {
+19.             context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };
+20.             return;
+21.         }
+22. 
+23.         var hasPermission = RolePermissionsStore.AllPermissions.Any(p =>
+24.             p.Role == user.Role &&
+25.             p.Management == management &&
+26.             (
+27.                 p.Access == PermissionAccess.Full ||
+28.                 (p.Access == PermissionAccess.Read && requiredAccess == PermissionAccess.Read)
+29.             ));
+30. 
+31.         if (!hasPermission)
+32.         {
+33.             context.Result = new JsonResult(new { message = "You don't have proper permission to do this" }) { StatusCode = StatusCodes.Status401Unauthorized };
+34.             return;
+35.         }
+36. 
+37.         await next();
+38.     }
+39. }
+40. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+В.3 Резервне копіювання користувацьких даних
+
+GitHub репозиторій: https://github.com/NureKhaninaDaryna/apz-pzpi-22-1-khanina-daryna/blob/main/Lab2/pzpi-22-1-khanina-daryna-lab2/DineMetrics.BLL/Services/SettingsBackupService.cs 
+
+1. ﻿using DineMetrics.BLL.Services.Interfaces;
+2. using DineMetrics.Core.Models;
+3. using DineMetrics.Core.Shared;
+4. using DineMetrics.DAL;
+5. using DineMetrics.DAL.Repositories;
+6. 
+7. namespace DineMetrics.BLL.Services;
+8. 
+9. public class SettingsBackupService(IRepository<EaterySettingsBackup> repository, IRepository<Eatery> eateryRepository) : ISettingsBackupService
+10. {
+11.     public async Task<ServiceResult> BackupEaterySettings(int eateryId)
+12.     {
+13.         var eatery = await eateryRepository.GetByIdAsync(eateryId);
+14.         if (eatery == null) return ServiceResult.Failure(new Error("Eatery not found"));
+15. 
+16.         var backup = new EaterySettingsBackup
+17.         {
+18.             EateryId = eateryId,
+19.             OperatingHours = eatery.OperatingHours,
+20.             MaximumCapacity = eatery.MaximumCapacity,
+21.             TemperatureThreshold = eatery.TemperatureThreshold
+22.         };
+23. 
+24.         await repository.CreateAsync(backup);
+25.         
+26.         return ServiceResult.Success;
+27.     }
+28. 
+29.     public async Task<ServiceResult> RestoreEaterySettings(int eateryId, string backupName)
+30.     {
+31.         var backup = (await repository
+32.             .GetByPredicateAsync(b => b.EateryId == eateryId && b.BackupName == backupName))
+33.             .FirstOrDefault();
+34. 
+35.         if (backup == null) return ServiceResult.Failure(new Error("Backup not found"));
+36. 
+37.         var eatery = await eateryRepository.GetByIdAsync(eateryId);
+38.         if (eatery == null) return ServiceResult.Failure(new Error("Eatery not found"));
+39. 
+40.         eatery.OperatingHours = backup.OperatingHours;
+41.         eatery.MaximumCapacity = backup.MaximumCapacity;
+42.         eatery.TemperatureThreshold = backup.TemperatureThreshold;
+43. 
+44.         await eateryRepository.UpdateAsync(eatery);
+45.         
+46.         return ServiceResult.Success;
+47.     }
+48. 
+49.     public async Task<List<EaterySettingsBackup>> GetBackups(int eateryId)
+50.     {
+51.         var backups = await repository.GetByPredicateAsync(b => b.EateryId == eateryId);
+52. 
+53.         return backups.OrderByDescending(b => b.BackupTime).ToList();
+54.     }
+55. }
+56. 
+
+
+
